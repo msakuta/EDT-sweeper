@@ -152,8 +152,10 @@
 		(accum, cell) => Math.max(accum, cell.distance), accum), 0)
 
 	function cellColor(cell){
-		if(cell.cleared)
-			return `rgb(${cell.distance / maxDist * 255}, 255, 255)`;
+		if(cell.cleared){
+			const value = cell.distance / maxDist * 191 + 63;
+			return `rgb(255, ${value}, ${value})`;
+		}
 		else
 			return "rgb(127,127,127";
 	}
