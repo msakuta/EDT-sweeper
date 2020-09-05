@@ -71,7 +71,7 @@
 
 Cleared cells: {numCleared} / {width * height - numMines} Mines: {numMines}
 
-<div style="position: relative">
+<div style="position: relative; text-align: center; height: {height * 30}px">
 	{#each cells as row, i}
 		{#each row as cell, j}
 			<div class="cell" style="left: {j * 30}px; top: {i * 30}px; width: 30px; height: 30px; background-color: {cellColor(cell)}"
@@ -90,6 +90,11 @@ Cleared cells: {numCleared} / {width * height - numMines} Mines: {numMines}
 		GAME CLEAR
 	</div>
 	{/if}
+</div>
+
+<hr>
+<div style="text-align: center">Powered by 
+	<a href="https://github.com/sveltejs/svelte">Svelte</a>
 </div>
 
 <style>
