@@ -2,6 +2,8 @@
 
 A minesweeper-inspired game that you can see [Euclidian Distance Transform](https://en.wikipedia.org/wiki/Distance_transform) instead of number of mines around the cell.
 
+Try it now on your browser! https://msakuta.github.io/EDT-sweeper/
+
 
 ## Get started
 
