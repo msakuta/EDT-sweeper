@@ -4,6 +4,7 @@
 	const width = 10
 	const height = 10
 	let cells = []
+	let numMines = 0;
 	for(let i = 0; i < height; i++){
 		let row = []
 		for(let j = 0; j < width; j++){
@@ -13,6 +14,8 @@
 				cleared: false,
 				distance: occupied ? INF : 0,
 			})
+			if(occupied)
+				numMines++;
 		}
 		cells.push(row)
 	}
@@ -31,7 +34,7 @@
 	}
 
 	let gameOver = false
-	let cleared = 0
+	let numCleared = 0
 
 	function handleMouseClick(event, i, j){
 		if(gameOver)
@@ -40,7 +43,7 @@
 		if(!cell.cleared){
 			cell.cleared = true;
 			cells[i][j] = cell
-			cleared++;
+			numCleared++;
 			if(cell.value){
 				gameOver = true;
 			}
@@ -57,13 +60,16 @@
 			return `rgb(255, ${value}, ${value})`;
 		}
 		else
-			return "rgb(127,127,127";
+			return "rgb(127,127,127)";
 	}
+
+	let cleared
+	$: cleared = width * height - numCleared === numMines
 </script>
 
 <h1>EDT sweeper in Svelte</h1>
 
-Cleared cells: {cleared}
+Cleared cells: {numCleared} / {width * height - numMines} Mines: {numMines}
 
 <div style="position: relative">
 	{#each cells as row, i}
@@ -75,8 +81,13 @@ Cleared cells: {cleared}
 		{/each}
 	{/each}
 	{#if gameOver}
-	<div class="message">
+	<div class="message red">
 		GAME OVER
+	</div>
+	{/if}
+	{#if cleared}
+	<div class="message green">
+		GAME CLEAR
 	</div>
 	{/if}
 </div>
@@ -91,12 +102,19 @@ Cleared cells: {cleared}
 
 	.message{
 		font-size: 30pt;
-		color: red;
 		text-align: center;
 		position: absolute;
 		left: 0px;
 		top: 0px;
 		right: 300px;
 		bottom: 300px;
+	}
+
+	.message.red{
+		color: red;
+	}
+
+	.message.green{
+		color: green;
 	}
 </style>
