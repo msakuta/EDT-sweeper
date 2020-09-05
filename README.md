@@ -5,6 +5,10 @@ A minesweeper-inspired game that you can see [Euclidian Distance Transform](http
 Try it now on your browser! https://msakuta.github.io/EDT-sweeper/
 
 
+## Screenshots
+
+![screenshot1](images/screenshot00.png)
+
 ## Get started
 
 Install the dependencies...
