@@ -36,13 +36,30 @@
 	let gameOver = false
 	let numCleared = 0
 
+	function clearCell(i, j){
+		const neighbors = [[-1,0], [0,-1], [1,0], [0,1]];
+		for(const neighbor of neighbors){
+			const [i2, j2] = [i + neighbor[0], j + neighbor[1]];
+			if(i2 < 0 || height <= i2 || j2 < 0 || width <= j2)
+				continue;
+			const cell = cells[i2][j2];
+			if(!cell.cleared && 3 < cell.distance){
+				cell.cleared = true;
+				// Don't need assignment trigger since the caller already does that
+				// cells[i2][j2] = cell;
+				clearCell(i2, j2);
+			}
+		}
+	}
+
 	function handleMouseClick(event, i, j){
 		if(gameOver)
 			return;
 		const cell = cells[i][j]
 		if(!cell.cleared){
 			cell.cleared = true;
-			cells[i][j] = cell
+			cells[i][j] = cell;
+			clearCell(i, j);
 			numCleared++;
 			if(cell.value){
 				gameOver = true;
