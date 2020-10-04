@@ -45,6 +45,7 @@
 			const cell = cells[i2][j2];
 			if(!cell.cleared && 3 < cell.distance){
 				cell.cleared = true;
+				numCleared++;
 				// Don't need assignment trigger since the caller already does that
 				// cells[i2][j2] = cell;
 				clearCell(i2, j2);
